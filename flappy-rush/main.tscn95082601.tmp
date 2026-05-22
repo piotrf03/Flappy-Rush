@@ -1,0 +1,115 @@
+[gd_scene format=3 uid="uid://dacivk0e7fllg"]
+
+[ext_resource type="Script" uid="uid://wj0fapxpkbfq" path="res://camera.gd" id="1_camera"]
+[ext_resource type="Script" uid="uid://clqeiy7ftxkfe" path="res://player.gd" id="2_player"]
+[ext_resource type="Texture2D" uid="uid://ct2hv2u604c1d" path="res://icon.svg" id="3_icon"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1"]
+friction = 0.15
+bounce = 0.4
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1"]
+radius = 16.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(5000, 100)
+
+[node name="Main" type="Node2D" unique_id=864003507]
+
+[node name="Background" type="CanvasLayer" parent="." unique_id=168300823]
+layer = -1
+
+[node name="Sky" type="ColorRect" parent="Background" unique_id=693330144]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.361, 0.58, 0.988, 1)
+
+[node name="Player" type="RigidBody2D" parent="." unique_id=1865178523]
+position = Vector2(200, 200)
+physics_material_override = SubResource("PhysicsMaterial_1")
+lock_rotation = true
+linear_damp = 0.5
+script = ExtResource("2_player")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=1572751252]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_icon")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=1122036918]
+shape = SubResource("CircleShape2D_1")
+
+[node name="Ground" type="StaticBody2D" parent="." unique_id=775319095]
+position = Vector2(0, 400)
+
+[node name="Dirt" type="ColorRect" parent="Ground" unique_id=1354352527]
+offset_right = 5000.0
+offset_bottom = 100.0
+color = Color(0.588, 0.294, 0, 1)
+
+[node name="Grass" type="ColorRect" parent="Ground" unique_id=529227260]
+offset_right = 5000.0
+offset_bottom = 20.0
+color = Color(0.424, 0.851, 0.18, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground" unique_id=398274949]
+position = Vector2(2500, 50)
+shape = SubResource("RectangleShape2D_1")
+
+[node name="UILayer" type="CanvasLayer" parent="." unique_id=446655223]
+
+[node name="ScoreLabel" type="Label" parent="UILayer" unique_id=1735872748]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 200.0
+offset_bottom = 60.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Score: 0"
+
+[node name="GameOverPanel" type="Panel" parent="UILayer" unique_id=468660385]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="UILayer/GameOverPanel" unique_id=1898945564]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/GameOverPanel/CenterContainer" unique_id=482326088]
+layout_mode = 2
+
+[node name="GameOverLabel" type="Label" parent="UILayer/GameOverPanel/CenterContainer/VBoxContainer" unique_id=2039612110]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.2, 0.2, 1)
+theme_override_font_sizes/font_size = 48
+text = "GAME OVER!"
+horizontal_alignment = 1
+
+[node name="FinalScoreLabel" type="Label" parent="UILayer/GameOverPanel/CenterContainer/VBoxContainer" unique_id=828225336]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Final Score: 0"
+horizontal_alignment = 1
+
+[node name="RestartLabel" type="Label" parent="UILayer/GameOverPanel/CenterContainer/VBoxContainer" unique_id=680588827]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Click to restart"
+horizontal_alignment = 1
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=381585837 node_paths=PackedStringArray("player", "score_label", "game_over_panel", "final_score_label")]
+position = Vector2(400, 300)
+script = ExtResource("1_camera")
+player = NodePath("../Player")
+score_label = NodePath("../UILayer/ScoreLabel")
+game_over_panel = NodePath("../UILayer/GameOverPanel")
+final_score_label = NodePath("../UILayer/GameOverPanel/CenterContainer/VBoxContainer/FinalScoreLabel")
