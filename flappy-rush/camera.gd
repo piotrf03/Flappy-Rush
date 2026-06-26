@@ -2,7 +2,6 @@ extends Camera2D
 
 var scroll_speed := 100.0
 const SPEED_ACCEL := 2.0
-const MAX_SPEED := 600.0
 
 @export var player: RigidBody2D
 @export var score_label: Label
@@ -66,7 +65,7 @@ func _process(delta: float) -> void:
 		hint_label.visible = false
 
 	position.x += scroll_speed * delta
-	scroll_speed = min(scroll_speed + SPEED_ACCEL * delta, MAX_SPEED)
+	scroll_speed += SPEED_ACCEL * delta
 
 	spawn_obstacles()
 	process_falling_streams(delta)
