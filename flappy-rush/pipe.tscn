@@ -10,19 +10,47 @@ script = ExtResource("1_pipe")
 
 [node name="TopBody" type="StaticBody2D" parent="."]
 
+[node name="BodyOutline" type="ColorRect" parent="TopBody"]
+offset_left = -39.0
+offset_top = -1000.0
+offset_right = 39.0
+offset_bottom = -28.0
+color = Color(0.09, 0.36, 0.07, 1)
+
 [node name="PipeBody" type="ColorRect" parent="TopBody"]
 offset_left = -35.0
 offset_top = -1000.0
 offset_right = 35.0
 offset_bottom = -30.0
-color = Color(0.18, 0.722, 0.125, 1)
+color = Color(0.18, 0.66, 0.13, 1)
+
+[node name="BodyHighlight" type="ColorRect" parent="TopBody"]
+offset_left = -30.0
+offset_top = -1000.0
+offset_right = -20.0
+offset_bottom = -30.0
+color = Color(0.45, 0.9, 0.35, 0.85)
+
+[node name="LipOutline" type="ColorRect" parent="TopBody"]
+offset_left = -44.0
+offset_top = -34.0
+offset_right = 44.0
+offset_bottom = 0.0
+color = Color(0.09, 0.36, 0.07, 1)
 
 [node name="PipeLip" type="ColorRect" parent="TopBody"]
 offset_left = -40.0
 offset_top = -30.0
 offset_right = 40.0
-offset_bottom = 0.0
-color = Color(0.322, 0.851, 0.18, 1)
+offset_bottom = -2.0
+color = Color(0.3, 0.8, 0.17, 1)
+
+[node name="LipHighlight" type="ColorRect" parent="TopBody"]
+offset_left = -40.0
+offset_top = -30.0
+offset_right = -30.0
+offset_bottom = -2.0
+color = Color(0.5, 0.95, 0.4, 0.85)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TopBody"]
 position = Vector2(0, -500)
@@ -30,19 +58,47 @@ shape = SubResource("RectangleShape2D_1")
 
 [node name="BottomBody" type="StaticBody2D" parent="."]
 
-[node name="PipeLip" type="ColorRect" parent="BottomBody"]
-offset_left = -40.0
-offset_top = 0.0
-offset_right = 40.0
-offset_bottom = 30.0
-color = Color(0.322, 0.851, 0.18, 1)
+[node name="BodyOutline" type="ColorRect" parent="BottomBody"]
+offset_left = -39.0
+offset_top = 28.0
+offset_right = 39.0
+offset_bottom = 1000.0
+color = Color(0.09, 0.36, 0.07, 1)
 
 [node name="PipeBody" type="ColorRect" parent="BottomBody"]
 offset_left = -35.0
 offset_top = 30.0
 offset_right = 35.0
 offset_bottom = 1000.0
-color = Color(0.18, 0.722, 0.125, 1)
+color = Color(0.18, 0.66, 0.13, 1)
+
+[node name="BodyHighlight" type="ColorRect" parent="BottomBody"]
+offset_left = -30.0
+offset_top = 30.0
+offset_right = -20.0
+offset_bottom = 1000.0
+color = Color(0.45, 0.9, 0.35, 0.85)
+
+[node name="LipOutline" type="ColorRect" parent="BottomBody"]
+offset_left = -44.0
+offset_top = 0.0
+offset_right = 44.0
+offset_bottom = 34.0
+color = Color(0.09, 0.36, 0.07, 1)
+
+[node name="PipeLip" type="ColorRect" parent="BottomBody"]
+offset_left = -40.0
+offset_top = 2.0
+offset_right = 40.0
+offset_bottom = 30.0
+color = Color(0.3, 0.8, 0.17, 1)
+
+[node name="LipHighlight" type="ColorRect" parent="BottomBody"]
+offset_left = -40.0
+offset_top = 2.0
+offset_right = -30.0
+offset_bottom = 30.0
+color = Color(0.5, 0.95, 0.4, 0.85)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BottomBody"]
 position = Vector2(0, 500)

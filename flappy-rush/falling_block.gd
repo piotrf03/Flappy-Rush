@@ -1,20 +1,22 @@
 extends Area2D
 
-var speed = 350.0
+var speed := 350.0
+var _spin := 0.0
 
-func _ready():
-	# Podłączamy sygnał na wypadek fizycznego wejścia obiektu w pole kolizji klocka
+func _ready() -> void:
 	body_entered.connect(_on_body_entered)
+	_spin = randf_range(-3.0, 3.0)
+	# losowy odcień, by bloki nie były identyczne
+	rotation = randf_range(0, TAU)
 
-func _process(delta):
+func _process(delta: float) -> void:
 	position.y += speed * delta
-	
-	# Jeśli klocek spadnie bardzo nisko i minie ziemię, usuń go by nie zapychał pamięci
+	rotation += _spin * delta
+
+	# Usuń klocek po minięciu ekranu, by nie zapychał pamięci.
 	if position.y > 1500:
 		queue_free()
 
-func _on_body_entered(body):
-	# Sprawdzamy czy to, co uderzyło w klocek to gracz
+func _on_body_entered(body: Node) -> void:
 	if body.name == "Player":
-		# Klocki dzwonią do centralnego menedżera (czyli naszej kamery), zgłaszając zgon
 		get_tree().call_group("game_manager", "trigger_game_over")
